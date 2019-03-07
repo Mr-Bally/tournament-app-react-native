@@ -1,21 +1,21 @@
 import React from 'react';
 import { Button, View } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import homeStyle from '../styles/homeStyle';
 
-export default class MenuOptions extends React.Component {
+class MenuOptions extends React.Component {
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <View>
                 <View style={homeStyle.buttonContainer}>
                     <Button
-                        onPress={this._onPressButton}
+                        onPress={() => this.props.navigation.navigate('NewTournament')}
                         title="New tournament"
                     />
                 </View>
                 <View style={homeStyle.buttonContainer}>
                     <Button
-                        onPress={() => navigate('ExistingTournaments')}
+                        onPress={() => this.props.navigation.navigate('ExistingTournaments')}
                         title="View existing tournaments"
                     />
                 </View>
@@ -23,3 +23,5 @@ export default class MenuOptions extends React.Component {
         );
     }
 }
+
+export default withNavigation(MenuOptions);

@@ -9,7 +9,6 @@ export default homeStyle = StyleSheet.create({
   },
   headerContainer: {
     flex: 1,
-
     margin: 20
   },
   headerItem: {
@@ -21,5 +20,22 @@ export default homeStyle = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 30
+  },
+  infoText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  summaryContainer: {
+    margin: 10,
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+  },
+  inputContainer: {
+    height: 40,
+    borderColor: 'black',
+    borderWidth: 1
   }
+
 });
