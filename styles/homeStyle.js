@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 export default homeStyle = StyleSheet.create({
   container: {
     flex: 1,
+    margin: 5
   },
   buttonContainer: {
     margin: 20
@@ -23,8 +24,8 @@ export default homeStyle = StyleSheet.create({
   },
   infoText: {
     textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 20
+    fontSize: 15,
+    margin: 10
   },
   summaryContainer: {
     margin: 10,
@@ -33,9 +34,18 @@ export default homeStyle = StyleSheet.create({
     borderColor: '#d6d7da',
   },
   inputContainer: {
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1
+    flex: 1, 
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 5,
+    height: 30
+  },
+  picker: {
+    height: 50, 
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 30
   }
-
 });

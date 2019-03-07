@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Text, TextInput, View, Picker } from 'react-native';
+import { Button, Text, View, Picker } from 'react-native';
 import homeStyle from '../styles/homeStyle';
 import NumericInput from 'react-native-numeric-input';
 import { Input } from 'react-native-elements';
@@ -9,17 +9,29 @@ class CreateTournamentInput extends React.Component {
     render() {
         return (
             <View style={homeStyle.container}>
-                <Input placeholder='Name' />
-                <NumericInput minValue={2} maxValue={64} onChange={value => console.log(value)} />
-                <NumericInput minValue={20} maxValue={200} onChange={value => console.log(value)} />
-                <Picker>
-                    <Picker.Item label="Male" value="male" />
-                    <Picker.Item label="Female" value="female" />
-                </Picker>
-                <Button
-                    onPress={() => this.props.navigation.navigate('Fighters')}
-                    title="Create Tournament"
-                />
+                <View style={homeStyle.inputContainer}>
+                    <Input placeholder='Name' />
+                </View>
+                <View style={homeStyle.inputContainer}>
+                    <Text style={homeStyle.infoText}>Size</Text>
+                    <NumericInput minValue={2} maxValue={64} onChange={value => console.log(value)} />
+                </View>
+                <View style={homeStyle.inputContainer}>
+                    <Text style={homeStyle.infoText}>Weight</Text>
+                    <NumericInput minValue={20} maxValue={200} onChange={value => console.log(value)} />
+                </View>
+                <View style={homeStyle.inputContainer}>
+                    <Picker style={homeStyle.picker}>
+                        <Picker.Item label="Male" value="male" />
+                        <Picker.Item label="Female" value="female" />
+                    </Picker>
+                </View>
+                <View style={homeStyle.buttonContainer}>
+                    <Button
+                        onPress={() => this.props.navigation.navigate('Fighters')}
+                        title="Create Tournament"
+                    />
+                </View>
             </View>
         );
     }
