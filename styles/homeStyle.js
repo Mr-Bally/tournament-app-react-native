@@ -39,7 +39,7 @@ export default homeStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 5,
-    height: 30
+    height: 30,
   },
   picker: {
     height: 50, 

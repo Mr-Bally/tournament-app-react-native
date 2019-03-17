@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Text, View, Picker, Alert } from 'react-native';
+import { Button, View, Picker, Alert, AsyncStorage } from 'react-native';
 import homeStyle from '../styles/homeStyle';
 import { Input } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
@@ -13,26 +13,28 @@ class CreateTournamentInput extends React.Component {
             weight: '',
             sex: 'male'
         };
-        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    handleChange(evt) {
-        this.setState({ [evt.target.name]: evt.target.value });
+        this.storeItem = this.storeItem.bind(this);
     }
 
-    handleSubmit(evt) {
-        console.log(this.state);
+    async storeItem(key, item) {
+        try {
+            await AsyncStorage.setItem(key, JSON.stringify(item));
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    handleSubmit() {
         if (this.state.tournamentName === '' || this.state.size === '' || this.state.weight === '' || this.state.sex === '') {
-            Alert.alert(
-                'Please make sure you have entered all the details required'
-            )
-        } else if (this.state.size % 2 !== 0) {
-            Alert.alert(
-                'The tournament size must be a multiple of 2'
-            )
+            Alert.alert('Please make sure you have entered all the details required');
+        } else if (![2, 4, 8, 16, 32, 64].includes(parseInt(this.state.size))) {
+            Alert.alert('The tournament size must be a power of 2');
         } else {
-            // Save the state as a new object and pass the ID of new object to page
-            this.props.navigation.navigate('Fighters');
+            this.storeItem(this.state.tournamentName, this.state);
+            this.props.navigation.navigate('Fighters', {
+                tournamentName: this.state.tournamentName
+            });
             title = "Create Tournament";
         }
     }
