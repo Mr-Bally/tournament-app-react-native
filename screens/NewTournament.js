@@ -5,7 +5,7 @@ import CreateTournamentInput from '../components/CreateTournamnetInput';
 
 export default class NewTournament extends React.Component {
   static navigationOptions = {
-    title: 'New Tournament',
+    title: 'New Tournament'
   };
   render() {
     return (

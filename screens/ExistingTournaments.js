@@ -2,10 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 import homeStyle from '../styles/homeStyle';
 import CurrentTournamentsScroll from '../components/CurrentTournamentsScroll';
+import { withNavigation, HeaderBackButton } from 'react-navigation'
 
-export default class ExistingTournaments extends React.Component {
+class ExistingTournaments extends React.Component {
   static navigationOptions = {
-    title: 'Existing Tournaments',
+    title: 'Existing Tournaments'
   };
   render() {
     return (
@@ -15,3 +16,5 @@ export default class ExistingTournaments extends React.Component {
     );
   }
 }
+
+export default withNavigation(ExistingTournaments);

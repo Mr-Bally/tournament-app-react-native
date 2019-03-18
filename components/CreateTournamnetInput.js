@@ -33,7 +33,7 @@ class CreateTournamentInput extends React.Component {
         } else {
             this.storeItem(this.state.tournamentName, this.state);
             this.props.navigation.navigate('Fighters', {
-                tournamentName: this.state.tournamentName
+                details: JSON.stringify(this.state)
             });
             title = "Create Tournament";
         }

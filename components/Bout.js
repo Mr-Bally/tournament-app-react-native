@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, Button } from 'react-native';
 import homeStyle from '../styles/homeStyle';
 
-export default class BoutList extends React.Component {
+export default class Bout extends React.Component {
     render() {
         return (
             <View>

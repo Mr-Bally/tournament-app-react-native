@@ -3,50 +3,40 @@ import { View, ScrollView, AsyncStorage } from 'react-native';
 import homeStyle from '../styles/homeStyle';
 import AddFighter from '../components/AddFighter';
 import { Button } from 'react-native-elements';
-import { withNavigation } from 'react-navigation';
+import { StackActions, withNavigation, NavigationActions } from 'react-navigation';
 
-class NewTournament extends React.Component {
+class Fighters extends React.Component {
     constructor() {
         super();
-        const { navigation } = this.props;
-        const name = navigation.getParam('tournamentName');
-        console.log('Deets');
-        console.log(name);
-        //this.fighterNumbers = new Array(parseInt(tournamnetDetails.size)).fill('0');
-        this.fighterNumbers = ['sdf', 'sdf', 'sdf', 'sdf'];
-
         this.state = {
-            fighters: ''
-            
+            tournamentName: '',
+            fighters: []
         };
-        this.getAll = this.getAll.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.clear = this.clear.bind(this);
-    }
-
-    async getAll() {
-        try {
-            return await AsyncStorage.getAllKeys();
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-
-    async clear() {
-        try {
-            return await AsyncStorage.clear();
-        } catch (error) {
-            console.log(error.message);
-        }
     }
 
     handleSubmit() {
-        /*this.clear().then(() => {
-            this.getAll().then((data) => {
-                console.log(data);
-            });
-        });*/
+        this.merge(this.state.tournamentName, this.state.fighters);
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({ routeName: 'Home' })
+            ],
+        });
+        this.props.navigation.dispatch(resetAction);
+        this.props.navigation.navigate('ExistingTournaments');
+    }
 
+    async merge(key, item) {
+        try {
+            await AsyncStorage.mergeItem(key, JSON.stringify({ "fighters": item }));
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    childUpdate(data) {
+        this.state.fighters[data.id][Object.keys(data)[0]] = data[Object.keys(data)[0]]
     }
 
     static navigationOptions = {
@@ -54,13 +44,22 @@ class NewTournament extends React.Component {
         headerLeft: null
     };
     render() {
+        const { navigation } = this.props;
+        const details = JSON.parse(navigation.getParam('details'));
+        this.state.tournamentName = details['tournamentName'];
+        this.fighterNumbers = new Array();
+        for (var i = 0; i < parseInt(details['size']); i++) {
+            this.fighterNumbers.push(i);
+            this.state.fighters.push({ name: '', weight: '' });
+        }
+
         return (
             <View>
                 <ScrollView>
                     {
                         this.fighterNumbers.map((item, key) =>
                             (
-                                <AddFighter key={key} item={item}/>
+                                <AddFighter id={item} key={key} updateParent={this.childUpdate.bind(this)} />
                             ))
                     }
                     <View style={homeStyle.buttonContainer}>
@@ -75,4 +74,4 @@ class NewTournament extends React.Component {
     }
 }
 
-export default withNavigation(NewTournament);
+export default withNavigation(Fighters);
