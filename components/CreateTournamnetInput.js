@@ -11,7 +11,8 @@ class CreateTournamentInput extends React.Component {
             tournamentName: '',
             size: '',
             weight: '',
-            sex: 'male'
+            sex: 'male',
+            completed: 0
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.storeItem = this.storeItem.bind(this);

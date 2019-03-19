@@ -6,30 +6,40 @@ import TournamentBrief from './TournamentBrief'
 class CurrentTournamentsScroll extends React.Component {
     constructor() {
         super();
-        this.getAllKeys = this.getAllKeys.bind(this);
+        this.state = {
+            tournamentNames: []
+        }
+        this.getKeys = this.getKeys.bind(this);
     }
 
-    async getAllKeys() {
+    async getKeys() {
         try {
-            await AsyncStorage.getAllKeys().then((data) => {
-                console.log(data)
-                return data;
-            });
+            const allKeys = AsyncStorage.getAllKeys();
+            return allKeys
         } catch (error) {
             console.log(error.message);
         }
+        return
+    }
+
+    componentDidMount() {
+        AsyncStorage.getAllKeys((errs, result) => {
+            if (!errs) {
+                if (result !== null) {
+                    this.setState({ tournamentNames: result });
+                }
+            }
+        })
     }
 
     render() {
-        this.keys = this.getAllKeys();
-
         return (
             <View>
                 <ScrollView>
                     {
-                        this.keys.map((item, key) =>
+                        this.state.tournamentNames.map((item, key) =>
                             (
-                                <TournamentBrief />
+                                <TournamentBrief name={item} key={key} />
                             ))
                     }
                 </ScrollView>

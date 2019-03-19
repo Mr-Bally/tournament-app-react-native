@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import homeStyle from '../styles/homeStyle';
 import CurrentTournamentsScroll from '../components/CurrentTournamentsScroll';
-import { withNavigation, HeaderBackButton } from 'react-navigation'
+import { withNavigation } from 'react-navigation'
 
 class ExistingTournaments extends React.Component {
   static navigationOptions = {
