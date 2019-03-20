@@ -7,11 +7,11 @@ export default class TournamentHeader extends React.Component {
         super();
     }
     render() {
-        console.log('this.props');
-        console.log(this.props);
+        this.winner = this.props.winner;
         this.completed = 'Completed';
         if(this.props.completed === 0) {
             this.completed = 'Ongoing';
+            this.winner = 'TBD';
         }
         return (
             <View style={homeStyle.container}>
@@ -19,7 +19,7 @@ export default class TournamentHeader extends React.Component {
                 <Text style={homeStyle.infoText}>Weight: {this.props.weight}</Text>
                 <Text style={homeStyle.infoText}>Size: {this.props.size}</Text>
                 <Text style={homeStyle.infoText}>Status: {this.completed}</Text>
-                <Text style={homeStyle.infoText}>Winner: TBD</Text>
+                <Text style={homeStyle.infoText}>Winner: {this.winner}</Text>
             </View>
         );
     }

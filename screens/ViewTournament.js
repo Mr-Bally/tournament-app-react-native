@@ -4,12 +4,14 @@ import homeStyle from '../styles/homeStyle';
 import TournamentHeader from '../components/TournamentHeader';
 import RoundOptions from '../components/RoundOptions';
 import BoutList from '../components/BoutList';
+import { withNavigation } from 'react-navigation';
 
-export default class ViewTournament extends React.Component {
+class ViewTournament extends React.Component {
     constructor() {
         super();
         this.state = {
-            tournament: {}
+            tournament: {},
+            currentRound: 0
         };
     }
 
@@ -28,6 +30,10 @@ export default class ViewTournament extends React.Component {
         });
     }
 
+    childUpdate(data) {
+        this.state.currentRound = data;
+    }
+
     render() {
         return (
             <View style={homeStyle.container}>
@@ -35,11 +41,21 @@ export default class ViewTournament extends React.Component {
                     name={this.state.tournament.tournamentName} 
                     weight={this.state.tournament.weight} 
                     size={this.state.tournament.size} 
-                    completed={this.state.tournament.completed} 
+                    completed={this.state.tournament.completed}
+                    winner={this.state.tournament.winner}
                 />
-                <RoundOptions />
-                <BoutList />
+                <RoundOptions 
+                    size={this.state.tournament.size} 
+                    updateParent={this.childUpdate.bind(this)} 
+                />
+                <BoutList //erroring here...passing null to fighters and rounds
+                    roundNum={this.state.currentRound} 
+                    fighters={this.state.tournament.fighters}
+                    rounds={this.state.tournament.rounds}
+                />
             </View>
         );
     }
 }
+
+export default withNavigation(ViewTournament);

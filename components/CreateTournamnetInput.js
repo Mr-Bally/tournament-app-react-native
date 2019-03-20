@@ -12,10 +12,13 @@ class CreateTournamentInput extends React.Component {
             size: '',
             weight: '',
             sex: 'male',
-            completed: 0
+            completed: 0,
+            winner: '',
+            rounds: []
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.storeItem = this.storeItem.bind(this);
+        this.setRounds = this.setRounds.bind(this);
     }
 
     async storeItem(key, item) {
@@ -40,6 +43,30 @@ class CreateTournamentInput extends React.Component {
         }
     }
 
+    setRounds(size) {
+        var array;
+        switch (size) {
+            case 2:
+                array = [[]];
+                break;
+            case 4:
+                array = [[],[]];
+                break;
+            case 8:
+                array = [[],[],[]];
+                break;
+            case 16:
+                array = [[],[],[],[]];
+                break;
+            case 32:
+                array = [[],[],[],[],[]];
+                break;
+            default:
+                array = [[],[],[],[],[],[]];
+        }
+        this.setState({ size: size, rounds: array });
+    }
+
     render() {
         return (
             <View style={homeStyle.container}>
@@ -54,7 +81,7 @@ class CreateTournamentInput extends React.Component {
                 <View style={homeStyle.inputContainer}>
                     <Input
                         keyboardType='numeric'
-                        onChangeText={(val) => this.setState({ size: val })}
+                        onChangeText={(val) => this.setRounds(parseInt(val))}
                         maxLength={2}
                         placeholder='Size'
                         name='size'

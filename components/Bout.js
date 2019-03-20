@@ -10,6 +10,7 @@ export default class Bout extends React.Component {
                 <Button
                     title="Jones VS Ammari"
                     style={homeStyle.buttonGroup}
+                    onPress={() => console.log('clicked')}
                 />
             </View>
         );
