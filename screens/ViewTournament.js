@@ -11,7 +11,8 @@ class ViewTournament extends React.Component {
         super();
         this.state = {
             tournament: {},
-            currentRound: 0
+            currentRound: 0,
+            hasLoaded: false
         };
     }
 
@@ -25,36 +26,40 @@ class ViewTournament extends React.Component {
         AsyncStorage.getItem(name).then((result) => {
             if (result !== null) {
                 var jsonResult = JSON.parse(result)
-                this.setState({ tournament: jsonResult });
+                this.setState({ tournament: jsonResult, currentRound: 0, hasLoaded: true });
             }
         });
     }
 
     childUpdate(data) {
-        this.state.currentRound = data;
+        this.setState({currentRound: data});
     }
 
     render() {
-        return (
-            <View style={homeStyle.container}>
-                <TournamentHeader 
-                    name={this.state.tournament.tournamentName} 
-                    weight={this.state.tournament.weight} 
-                    size={this.state.tournament.size} 
-                    completed={this.state.tournament.completed}
-                    winner={this.state.tournament.winner}
-                />
-                <RoundOptions 
-                    size={this.state.tournament.size} 
-                    updateParent={this.childUpdate.bind(this)} 
-                />
-                <BoutList //erroring here...passing null to fighters and rounds
-                    roundNum={this.state.currentRound} 
-                    fighters={this.state.tournament.fighters}
-                    rounds={this.state.tournament.rounds}
-                />
-            </View>
-        );
+        if (this.state.hasLoaded) {
+            return (
+                <View style={homeStyle.container}>
+                    <TournamentHeader
+                        name={this.state.tournament.tournamentName}
+                        weight={this.state.tournament.weight}
+                        size={this.state.tournament.size}
+                        completed={this.state.tournament.completed}
+                        winner={this.state.tournament.winner}
+                    />
+                    <RoundOptions
+                        size={this.state.tournament.size}
+                        updateParent={this.childUpdate.bind(this)}
+                    />
+                    <BoutList
+                        roundNum={this.state.currentRound}
+                        fighters={JSON.stringify(this.state.tournament.fighters)}
+                        rounds={JSON.stringify(this.state.tournament.rounds)}
+                        tournamentName={this.state.tournament.tournamentName}
+                    />
+                </View>
+            );
+        }
+        return <View />;
     }
 }
 

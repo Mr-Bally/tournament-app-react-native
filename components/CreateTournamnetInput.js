@@ -18,10 +18,13 @@ class CreateTournamentInput extends React.Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.storeItem = this.storeItem.bind(this);
-        this.setRounds = this.setRounds.bind(this);
+        this.createBout = this.createBout.bind(this);
+        this.setUpRounds = this.setUpRounds.bind(this);
     }
 
     async storeItem(key, item) {
+        var setUpRounds = this.setUpRounds(parseInt(this.state.size));
+        item.rounds = setUpRounds;
         try {
             await AsyncStorage.setItem(key, JSON.stringify(item));
         } catch (error) {
@@ -43,28 +46,28 @@ class CreateTournamentInput extends React.Component {
         }
     }
 
-    setRounds(size) {
-        var array;
-        switch (size) {
-            case 2:
-                array = [[]];
-                break;
-            case 4:
-                array = [[],[]];
-                break;
-            case 8:
-                array = [[],[],[]];
-                break;
-            case 16:
-                array = [[],[],[],[]];
-                break;
-            case 32:
-                array = [[],[],[],[],[]];
-                break;
-            default:
-                array = [[],[],[],[],[],[]];
+    setUpRounds(size) {
+        var num = size;
+        var rounds = new Array();
+        var finished = false;
+        while (!finished) {
+            if (num === 2) {
+                rounds.push(new Array(this.createBout()));
+                finished = true;
+            } else {
+                var newArray = new Array();
+                for (var x = 0; x < (num / 2); x++) {
+                    newArray.push(this.createBout());
+                }
+                rounds.push(newArray);
+                num = num / 2;
+            }
         }
-        this.setState({ size: size, rounds: array });
+        return rounds;
+    }
+
+    createBout() {
+        return { fighterOne: '', fighterTwo: '', winner: 0, method: '' }
     }
 
     render() {
@@ -81,7 +84,7 @@ class CreateTournamentInput extends React.Component {
                 <View style={homeStyle.inputContainer}>
                     <Input
                         keyboardType='numeric'
-                        onChangeText={(val) => this.setRounds(parseInt(val))}
+                        onChangeText={(val) => this.setState({ size: val})}
                         maxLength={2}
                         placeholder='Size'
                         name='size'

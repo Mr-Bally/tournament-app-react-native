@@ -7,7 +7,6 @@ export default class TournamentHeader extends React.Component {
         super();
     }
     render() {
-        this.winner = this.props.winner;
         this.completed = 'Completed';
         if(this.props.completed === 0) {
             this.completed = 'Ongoing';
