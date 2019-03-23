@@ -13,6 +13,7 @@ export default class AddFighter extends React.Component {
             <View style={homeStyle.summaryContainer}>
                 <View style={homeStyle.inputContainer}>
                     <Input
+                        inputStyle={homeStyle.input}
                         type='text'
                         placeholder='Name'
                         name='fighterName'
@@ -21,6 +22,7 @@ export default class AddFighter extends React.Component {
                 </View>
                 <View style={homeStyle.inputContainer}>
                     <Input
+                        inputStyle={homeStyle.input}
                         keyboardType='numeric'
                         onChangeText={(val) => this.updateParent({ weight: val, id: this.props.id })}
                         maxLength={6}

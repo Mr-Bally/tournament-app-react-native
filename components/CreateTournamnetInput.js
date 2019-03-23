@@ -72,6 +72,7 @@ class CreateTournamentInput extends React.Component {
             <View style={homeStyle.container}>
                 <View style={homeStyle.inputContainer}>
                     <Input
+                        inputStyle={homeStyle.input}
                         type='text'
                         placeholder='Name'
                         name='tournamentName'
@@ -80,6 +81,7 @@ class CreateTournamentInput extends React.Component {
                 </View>
                 <View style={homeStyle.inputContainer}>
                     <Input
+                        inputStyle={homeStyle.input}
                         keyboardType='numeric'
                         onChangeText={(val) => this.setState({ size: val })}
                         maxLength={2}
@@ -89,6 +91,7 @@ class CreateTournamentInput extends React.Component {
                 </View>
                 <View style={homeStyle.inputContainer}>
                     <Input
+                        inputStyle={homeStyle.input}
                         keyboardType='numeric'
                         onChangeText={(val) => this.setState({ weight: val })}
                         maxLength={6}

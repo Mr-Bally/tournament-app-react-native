@@ -6,7 +6,14 @@ import { withNavigation } from 'react-navigation'
 
 class ExistingTournaments extends React.Component {
   static navigationOptions = {
-    title: 'Existing Tournaments'
+    title: 'Existing Tournaments',
+    headerStyle: {
+      backgroundColor: '#002E2C'
+    },
+    headerTintColor: '#bebece',
+    headerTitleStyle: {
+      color: '#bebece',
+    }
   };
   render() {
     return (

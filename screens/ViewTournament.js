@@ -19,7 +19,14 @@ class ViewTournament extends React.Component {
     }
 
     static navigationOptions = {
-        title: 'View Tournament'
+        title: 'View Tournament',
+        headerStyle: {
+            backgroundColor: '#002E2C'
+        },
+        headerTintColor: '#bebece',
+        headerTitleStyle: {
+            color: '#bebece',
+        }
     };
 
     componentDidMount() {

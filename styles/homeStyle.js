@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export default homeStyle = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 5
+    backgroundColor: '#394053'
   },
   buttonContainer: {
     margin: 20
@@ -20,12 +20,14 @@ export default homeStyle = StyleSheet.create({
   headerText: {
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 30
+    fontSize: 30,
+    color: '#B0A084'
   },
   infoText: {
     textAlign: 'center',
     fontSize: 15,
-    margin: 10
+    margin: 10,
+    color: '#B0A084'
   },
   summaryContainer: {
     margin: 10,
@@ -40,12 +42,17 @@ export default homeStyle = StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     height: 30,
+    color: '#B0A084'
   },
   picker: {
     height: 50,
     width: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 30
+    margin: 30,
+    color: '#B0A084'
+  },
+  input: {
+    color: '#B0A084'
   }
 });

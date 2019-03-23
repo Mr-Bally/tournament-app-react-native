@@ -7,7 +7,14 @@ import IndexHeader from '../components/IndexHeader';
 export default class Home extends React.Component {
   static navigationOptions = {
     title: 'Home',
-  };
+    headerStyle: {
+      backgroundColor: '#002E2C'
+    },
+    headerTintColor: '#bebece',
+    headerTitleStyle: {
+      color: '#bebece',
+    }
+  }
   render() {
     return (
       <View style={homeStyle.container}>

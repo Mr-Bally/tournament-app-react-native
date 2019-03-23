@@ -41,7 +41,14 @@ class Fighters extends React.Component {
 
     static navigationOptions = {
         title: 'Fighters',
-        headerLeft: null
+        headerLeft: null,
+        headerStyle: {
+            backgroundColor: '#002E2C'
+        },
+        headerTintColor: '#bebece',
+        headerTitleStyle: {
+            color: '#bebece',
+        }
     };
     render() {
         const { navigation } = this.props;
@@ -54,7 +61,7 @@ class Fighters extends React.Component {
         }
 
         return (
-            <View>
+            <View style={homeStyle.container}>
                 <ScrollView>
                     {
                         this.fighterNumbers.map((item, key) =>
