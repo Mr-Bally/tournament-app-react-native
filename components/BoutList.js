@@ -59,7 +59,7 @@ class BoutList extends React.Component {
 
             AsyncStorage.setItem(this.props.tournamentName, JSON.stringify(dataObj));
         }).done();
-        this.props.navigation.navigate('Home');
+        this.props.navigation.navigate('ExistingTournaments');
     }
 
     createFirstRound(fighters, rounds) {
