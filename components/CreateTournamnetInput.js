@@ -13,7 +13,7 @@ class CreateTournamentInput extends React.Component {
             weight: '',
             sex: 'male',
             completed: 0,
-            winner: '',
+            champion: 'TBD',
             rounds: []
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,12 +52,12 @@ class CreateTournamentInput extends React.Component {
         var finished = false;
         while (!finished) {
             if (num === 2) {
-                rounds.push(new Array(this.createBout()));
+                rounds.push(new Array(this.createBout(0)));
                 finished = true;
             } else {
                 var newArray = new Array();
                 for (var x = 0; x < (num / 2); x++) {
-                    newArray.push(this.createBout());
+                    newArray.push(this.createBout(x));
                 }
                 rounds.push(newArray);
                 num = num / 2;
@@ -66,8 +66,8 @@ class CreateTournamentInput extends React.Component {
         return rounds;
     }
 
-    createBout() {
-        return { fighterOne: '', fighterTwo: '', winner: 0, method: '' }
+    createBout(num) {
+        return { boutNum: num, fighterOne: '', fighterTwo: '', winner: 0, method: '' }
     }
 
     render() {

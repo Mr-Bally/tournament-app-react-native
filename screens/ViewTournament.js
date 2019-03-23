@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, AsyncStorage } from 'react-native';
+import { View, AsyncStorage, Button } from 'react-native';
 import homeStyle from '../styles/homeStyle';
 import TournamentHeader from '../components/TournamentHeader';
 import RoundOptions from '../components/RoundOptions';
@@ -14,6 +14,8 @@ class ViewTournament extends React.Component {
             currentRound: 0,
             hasLoaded: false
         };
+        this.deleteTournament = this.deleteTournament.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     static navigationOptions = {
@@ -26,13 +28,29 @@ class ViewTournament extends React.Component {
         AsyncStorage.getItem(name).then((result) => {
             if (result !== null) {
                 var jsonResult = JSON.parse(result)
-                this.setState({ tournament: jsonResult, currentRound: 0, hasLoaded: true });
+                this.setState({ tournament: jsonResult, hasLoaded: true });
             }
         });
     }
 
     childUpdate(data) {
-        this.setState({currentRound: data});
+        this.setState({ currentRound: data, hasLoaded: true }, () => {
+            console.log(this.state, 'state');
+        });
+    }
+
+    delete() {
+        this.deleteTournament(this.state.tournament.tournamentName).then(() => {
+            this.props.navigation.navigate('Home');
+        });
+    }
+
+    async deleteTournament(key) {
+        try {
+            await AsyncStorage.removeItem(key);
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     render() {
@@ -44,8 +62,14 @@ class ViewTournament extends React.Component {
                         weight={this.state.tournament.weight}
                         size={this.state.tournament.size}
                         completed={this.state.tournament.completed}
-                        winner={this.state.tournament.winner}
+                        winner={this.state.tournament.champion}
                     />
+                    <View style={homeStyle.buttonContainer}>
+                        <Button
+                            onPress={this.delete}
+                            title="Delete"
+                        />
+                    </View>
                     <RoundOptions
                         size={this.state.tournament.size}
                         updateParent={this.childUpdate.bind(this)}
@@ -58,8 +82,9 @@ class ViewTournament extends React.Component {
                     />
                 </View>
             );
+        } else {
+            return <View />;
         }
-        return <View />;
     }
 }
 
