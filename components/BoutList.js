@@ -9,12 +9,6 @@ class BoutList extends React.Component {
         this.state = {
             refresh: true
         };
-        this.isRoundCompleted = this.isRoundCompleted.bind(this);
-        this.isRoundCreated = this.isRoundCreated.bind(this);
-        this.createFirstRound = this.createFirstRound.bind(this);
-        this.createNextRound = this.createNextRound.bind(this);
-        this.generateRounds = this.generateRounds.bind(this);
-        this.saveRound = this.saveRound.bind(this);
         this.getRound = this.getRound.bind(this);
         this.childUpdate = this.childUpdate.bind(this);
     }
@@ -76,13 +70,13 @@ class BoutList extends React.Component {
         return this.generateRounds(names, rounds);
     }
 
-    createNextRound(previousRound, currentRound) {  //NEED TO IMPLEMENT
+    createNextRound(previousRound, currentRound) {
         var fighterNames = new Array();
-        for(var x=0; x < previousRound.length; x++) {
-            if(previousRound[x].winner === 1) {
+        for (var x = 0; x < previousRound.length; x++) {
+            if (previousRound[x].winner === 1) {
                 fighterNames.push(previousRound[x].fighterOne);
             } else {
-                fighterNames.push(previousRound[x].fighterOne);
+                fighterNames.push(previousRound[x].fighterTwo);
             }
         }
         return this.generateRounds(fighterNames, currentRound);

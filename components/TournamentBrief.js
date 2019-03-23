@@ -17,7 +17,7 @@ class TournamentBrief extends React.Component {
             if (result !== null) {
                 jsonResult = JSON.parse(result);
                 var completed = 'COMPLETED';
-                if(jsonResult["completed"] === 0) {
+                if (jsonResult["completed"] === 0) {
                     completed = 'UNCOMPLETED';
                 }
                 this.setState({ completed: completed, size: jsonResult["size"] });

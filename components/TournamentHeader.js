@@ -3,10 +3,6 @@ import { View, Text } from 'react-native';
 import homeStyle from '../styles/homeStyle';
 
 export default class TournamentHeader extends React.Component {
-    constructor() {
-        super();
-    }
-
     render() {
         this.completed = 'Completed';
         if (this.props.completed === 0) {

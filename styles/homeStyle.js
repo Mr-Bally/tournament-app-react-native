@@ -34,7 +34,7 @@ export default homeStyle = StyleSheet.create({
     borderColor: '#d6d7da',
   },
   inputContainer: {
-    flex: 1, 
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -42,7 +42,7 @@ export default homeStyle = StyleSheet.create({
     height: 30,
   },
   picker: {
-    height: 50, 
+    height: 50,
     width: 150,
     justifyContent: 'center',
     alignItems: 'center',

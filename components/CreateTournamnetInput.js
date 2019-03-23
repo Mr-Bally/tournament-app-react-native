@@ -17,9 +17,6 @@ class CreateTournamentInput extends React.Component {
             rounds: []
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.storeItem = this.storeItem.bind(this);
-        this.createBout = this.createBout.bind(this);
-        this.setUpRounds = this.setUpRounds.bind(this);
     }
 
     async storeItem(key, item) {
@@ -84,7 +81,7 @@ class CreateTournamentInput extends React.Component {
                 <View style={homeStyle.inputContainer}>
                     <Input
                         keyboardType='numeric'
-                        onChangeText={(val) => this.setState({ size: val})}
+                        onChangeText={(val) => this.setState({ size: val })}
                         maxLength={2}
                         placeholder='Size'
                         name='size'

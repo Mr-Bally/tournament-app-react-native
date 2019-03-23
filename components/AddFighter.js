@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import homeStyle from '../styles/homeStyle';
 import { Input } from 'react-native-elements';
 

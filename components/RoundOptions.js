@@ -46,19 +46,18 @@ export default class RoundOptions extends React.Component {
     }
 
     render() {
-        this.roundsArray = this.setRounds(parseInt(this.props.size));
         return (
             <View style={homeStyle.inputContainer}>
-                <Picker 
+                <Picker
                     style={homeStyle.picker}
                     name='round'
                     selectedValue={this.state.round}
-                    onValueChange={(val, itemIndex) =>
+                    onValueChange={(val) =>
                         this.pickerChange(val)
                     }
                 >
                     {
-                        this.roundsArray.map((item, key) =>
+                        this.setRounds(parseInt(this.props.size)).map((item, key) =>
                             (
                                 <Picker.Item label={item} key={key} value={key} />
                             ))
